@@ -24,6 +24,8 @@ public class RelatedResourcesPage extends PageObjectBase {
    */
   public RelatedResourcesPage(String path) {
     super(path);
+    
+    
 
     // Get the actual section, if it's present.
     List<WebElement> findList = getBrowser().findElements(By.cssSelector("#nvcgRelatedResourcesArea"));
@@ -52,11 +54,10 @@ public class RelatedResourcesPage extends PageObjectBase {
 
     List<RelatedResource> links = new ArrayList<RelatedResource>();
     // Get the list of links.
-    List<WebElement> rawLinks = getBrowser().findElements(By.cssSelector("#nvcgRelatedResourcesArea ul li a"));
+    List<WebElement> rawLinks = getBrowser().findElements(By.cssSelector("#nvcgRelatedResourcesArea ul li a:nth-child(1)"));
     for (WebElement link : rawLinks) {
       links.add(new RelatedResource(link));
     }
-
     return links;
   }
 

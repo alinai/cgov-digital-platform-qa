@@ -12,40 +12,55 @@ import gov.cancer.pageobject.crosscutting.RelatedResourcesPage;
 import gov.cancer.pageobject.helper.RelatedResource;
 import gov.cancer.tests.TestObjectBase;
 import gov.cancer.tests.TestRunner;
+/**
+* Test Case: 
+* Verify Related Resources section and links
+
+* Test scenarios:
+* Assert Related Resources section exists on the page
+* Assert Related Resources internal links exists on the page
+* Assert non-zero number of Related Resources internal links are present.
+* Assert all Related Resources internal links have non-blank hrefs.
+* Assert all Related Resources internal link hrefs contain no whitespace.  (i.e. no leading/trailing/embedded spaces, tabs, new lines.)
+* Assert all Related Resources external links have “Exit Disclaimer” styling 
+
+* Negative Tests:
+8 Assert no Related Resources section/links appear on the page */
+
 
 public class RelatedResources_Test extends TestObjectBase {
 
   @Test(dataProvider = "getPagesWithRelatedResources")
-  public void VerifyRelatedResourcesSectionAppears(String path) {
+  public void verifyRelatedResourcesSectionAppears(String path) {
 
-    // Get the page.
-    TestRunner.run(RelatedResourcesPage.class, path, (RelatedResourcesPage page) -> {
+	  // Get the page.
+	  TestRunner.run(RelatedResourcesPage.class, path, (RelatedResourcesPage page) -> {
 
       // Assert the related resources section is visible.
-      Assert.assertTrue(page.hasRelatedResources(), "Related Resources section is visible.");
+      Assert.assertTrue(page.hasRelatedResources(), "Related Resources section is visible");
 
     });
   }
 
  
-
-  @Test(dataProvider = "getPagesWithRelatedResources")
-  public void VerifyRelatedResourcesLinks(String path) {
+  @Test(dataProvider = "getPagesWithRelatedResources", priority = 2)
+  public void verifyRelatedResourcesLinks(String path) {
 
     // Get the page.
     TestRunner.run(RelatedResourcesPage.class, path, (RelatedResourcesPage page) -> {
 
       List<RelatedResource> resources = page.getRelatedResources();
 
-      // Are there any related resources?
+      // Are there any related resources link?
+      // If there are no links at all no statement will get executed after this line
       Assert.assertTrue(resources.size() > 0);
 
-      // For each resource.
+      // For each resource execute the following assertions.
       for (RelatedResource item : resources) {
-
-        // Is it a link?
-        Assert.assertTrue(item.isLinkElement(), "Is a link tag.");
-
+    	
+        // Does this link have 'a' tag?
+        Assert.assertTrue(item.isLinkElement(), "Does this link have 'a' tag.");
+        
         // Does it have non-blank text?
         Assert.assertTrue(item.isLinkTextBlank(), "Is not blank.");
         
@@ -55,17 +70,19 @@ public class RelatedResources_Test extends TestObjectBase {
         // Does it have broken links?
         Assert.assertTrue(item.isLinkBroken(), "Links not broken.");
         
-        // Does external links have Exit disclaimer styling
-        // Not yet implemented ====
-
+        // Does external links have exit disclaimer 
+        Assert.assertTrue(item.isLinkExternal(), "External links have exit disclaimer.");
         
       }
 
     });
   }
+  
+  
+ 
 
   /**
-   * Returns a list of paths for pagpes which are expected to display
+   * Returns a list of paths for pages which are expected to display
    * a related resources section.
    */
   @DataProvider(name = "getPagesWithRelatedResources")
@@ -79,13 +96,13 @@ public class RelatedResources_Test extends TestObjectBase {
  //=======================Without Resources ========== 
  
     
-  @Test(dataProvider = "getPagesWithoutRelatedResources")
-  public void VerifyRelatedResourcesSectionDoesNotAppear(String path) {
+  @Test(dataProvider = "getPagesWithoutRelatedResources", priority = 1)
+  public void verifyRelatedResourcesSectionDoesNotAppear(String path) {
 
     // Get the page.
     TestRunner.run(RelatedResourcesPage.class, path, (RelatedResourcesPage page) -> {
 
-      // Assert the related resources section is visible.
+      // Assert the related resources section is NOT visible.
       Assert.assertFalse(page.hasRelatedResources(), "Page has no Related Resources section.");
 
     });
@@ -93,7 +110,7 @@ public class RelatedResources_Test extends TestObjectBase {
   
   
   /**
-   * Returns a list of paths for pagpes which are NOT expected to display a related
+   * Returns a list of paths for pages which are NOT expected to display a related
    * resources section.
    */
   @DataProvider(name = "getPagesWithoutRelatedResources")
