@@ -34,6 +34,25 @@ public class PageOptions_Test extends TestObjectBase {
   }
 
   /**
+   * Print Button are visible on all pages. Testing that this is true. // There's
+   * no need checking these buttons aren't showing up where they shouldn't.
+   *
+   * @param path
+   *          Path of the page to check.
+   */
+
+  @Test(dataProvider = "getPageOptionsPaths")
+  public void printIconIsVisible(String path) {
+    String cssSelector = "page-options--print";
+    TestRunner.run(PageOptions.class, path, (PageOptions page) -> {
+
+      Assert.assertTrue(page.ButtonVisible(cssSelector), "PrintIcon is visible.");
+
+    });
+
+  }
+
+  /**
    * Retrieves a list of paths to pages which are expected to have pageoptions
    * container.
    *

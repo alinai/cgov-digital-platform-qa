@@ -27,7 +27,7 @@ public class Breakpoint {
    *
    * @return the desired width of the browser window.
    */
-  public int GetWidth() {
+  public int getWidth() {
     return this.width;
   }
 
@@ -36,7 +36,7 @@ public class Breakpoint {
    *
    * @return the desired height of the browser window.
    */
-  public int GetHeight() {
+  public int getHeight() {
     return this.height;
   }
 }
