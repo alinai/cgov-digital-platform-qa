@@ -7,7 +7,6 @@ import java.net.URL;
 import java.util.Properties;
 
 import org.apache.commons.lang3.SystemUtils;
-import org.bouncycastle.jcajce.provider.asymmetric.dsa.DSASigner.noneDSA;
 
 /**
  * Presents an interface for retieviving values stored in the config.properties
@@ -103,8 +102,8 @@ public class Configuration {
   }
 
   /**
-   * Retrieve the top-level domain which is considered to be "internal"
-   * for purposes government / non-government.
+   * Retrieve the top-level domain which is considered to be "internal" for
+   * purposes government / non-government.
    *
    * @return
    */

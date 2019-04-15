@@ -32,6 +32,11 @@
       <class name="gov.cancer.tests.crosscutting.LanguageToggle_Test" />
     </classes>
   </test>
+  <test name="Page Options tests." preserve-order="true">
+    <classes>
+      <class name="gov.cancer.tests.crosscutting.PageOptions_Test" />
+    </classes>
+  </test>
 
   <test name="Simple Dates tests." preserve-order="true">
     <classes>

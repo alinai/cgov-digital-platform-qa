@@ -32,6 +32,9 @@ public class PageOptions extends PageObjectBase {
     return false;
   }
 
+  /*
+   * Testing if the PageOptions Buttons exists on page and is visible
+   */
   public boolean ButtonVisible(String buttonSelector) {
     List<WebElement> elementExists = getButtonControl(buttonSelector);
 
@@ -42,6 +45,9 @@ public class PageOptions extends PageObjectBase {
     return false;
   }
 
+  /*
+   * Finds and returns PageOptionsControl
+   */
   private List<WebElement> getPageOptionsControl() {
     List<WebElement> pocControls = getBrowser().findElements(By.cssSelector("#PageOptionsControl1"));
     // int controlCount = pocControls.size();
@@ -50,6 +56,9 @@ public class PageOptions extends PageObjectBase {
     return pocControls;
   }
 
+  /*
+   * Finds and returns ButtonControls
+   */
   private List<WebElement> getButtonControl(String buttonSelector) {
     List<WebElement> buttonControls = getBrowser().findElements(By.cssSelector("li." + buttonSelector));
     // int controlCount = buttonControls.size();

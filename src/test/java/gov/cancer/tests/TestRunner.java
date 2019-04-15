@@ -7,8 +7,8 @@ import org.openqa.selenium.WebDriver;
 
 import gov.cancer.framework.Breakpoint;
 import gov.cancer.framework.Configuration;
-import gov.cancer.pageobject.PageObjectBase;
 import gov.cancer.framework.IResize;
+import gov.cancer.pageobject.PageObjectBase;
 
 /**
  * Helper class to encapsulate the logic of instantiating a page object and
@@ -35,40 +35,101 @@ public class TestRunner<T extends PageObjectBase> {
     void test(T page);
   }
 
+  /**
+   * Static method for encapuslating the the logic of instantiating a page object
+   * and enforcing that the object is cleaned up afterward. This is main piece for
+   * guaranteeing that we don't end up with a bunch of zombie browser windows open
+   * after a test fails.This method
+   *
+   * @param classImplementation
+   *          A Class object. Typically passed along the lines of
+   *          {@code}MyPageObjectClass.class{@code}
+   * @param path
+   *          The path of the URL to be tested. (e.g. /types/lung)
+   * @param callback
+   *          Callback method containing the tests to be executed.
+   */
 
-
-  public static <T extends PageObjectBase> void runMobile(Class<T> classImplementation, String path, ITestAction<T> callback)  {
-    Configuration config= new Configuration();
+  public static <T extends PageObjectBase> void runMobile(Class<T> classImplementation, String path,
+      ITestAction<T> callback) {
+    Configuration config = new Configuration();
     Breakpoint breakpoint = config.getMobileBreakpoint();
-    run(classImplementation,breakpoint,path,callback);
-  }
-
-  public static <T extends PageObjectBase> void runTablet(Class<T> classImplementation, String path,
-      ITestAction<T> callback) {
-    throw new UnsupportedOperationException();
-
-  }
-
-  public static <T extends PageObjectBase> void runDesktop(Class<T> classImplementation, String path,
-      ITestAction<T> callback) {
-    throw new UnsupportedOperationException();
-
-  }
-
-  public static <T extends PageObjectBase> void run(Class<T> classImplementation, Breakpoint breakpoint, String path,
-      ITestAction<T> callback) {
-        runImplementation(classImplementation,
-          (WebDriver browser)->{
-            Dimension size = new Dimension(breakpoint.getWidth(),breakpoint.getHeight());
-            browser.manage().window().setSize(size);
-          },
-          path,callback);
+    run(classImplementation, breakpoint, path, callback);
   }
 
   /**
    * Static method for encapuslating the the logic of instantiating a page object
    * and enforcing that the object is cleaned up afterward. This is main piece for
-   * guaranteeing that we don't end up wiht a bunch of zombie browser windows open
+   * guaranteeing that we don't end up with a bunch of zombie browser windows open
+   * after a test fails.
+   *
+   * @param classImplementation
+   *          A Class object. Typically passed along the lines of
+   *          {@code}MyPageObjectClass.class{@code}
+   * @param path
+   *          The path of the URL to be tested. (e.g. /types/lung)
+   * @param callback
+   *          Callback method containing the tests to be executed.
+   */
+
+  public static <T extends PageObjectBase> void runTablet(Class<T> classImplementation, String path,
+      ITestAction<T> callback) {
+    Configuration config = new Configuration();
+    Breakpoint breakpoint = config.getTabletBreakpoint();
+    run(classImplementation, breakpoint, path, callback);
+  }
+
+  /**
+   * Static method for encapuslating the the logic of instantiating a page object
+   * and enforcing that the object is cleaned up afterward. This is main piece for
+   * guaranteeing that we don't end up with a bunch of zombie browser windows open
+   * after a test fails.
+   *
+   * @param classImplementation
+   *          A Class object. Typically passed along the lines of
+   *          {@code}MyPageObjectClass.class{@code}
+   * @param path
+   *          The path of the URL to be tested. (e.g. /types/lung)
+   * @param callback
+   *          Callback method containing the tests to be executed.
+   */
+
+  public static <T extends PageObjectBase> void runDesktop(Class<T> classImplementation, String path,
+      ITestAction<T> callback) {
+    Configuration config = new Configuration();
+    Breakpoint breakpoint = config.getDesktopBreakpoint();
+    run(classImplementation, breakpoint, path, callback);
+  }
+
+  /**
+   * Static method for encapuslating the the logic of instantiating a page object
+   * and enforcing that the object is cleaned up afterward. This is main piece for
+   * guaranteeing that we don't end up with a bunch of zombie browser windows open
+   * after a test fails.
+   *
+   * @param classImplementation
+   *          A Class object. Typically passed along the lines of
+   *          {@code}MyPageObjectClass.class{@code}
+   * @param breakpoint
+   *          Contains the dimensions for a responsive layout breakpoint
+   * @param path
+   *          The path of the URL to be tested. (e.g. /types/lung)
+   * @param callback
+   *          Callback method containing the tests to be executed.
+   */
+
+  public static <T extends PageObjectBase> void run(Class<T> classImplementation, Breakpoint breakpoint, String path,
+      ITestAction<T> callback) {
+    runImplementation(classImplementation, (WebDriver browser) -> {
+      Dimension size = new Dimension(breakpoint.getWidth(), breakpoint.getHeight());
+      browser.manage().window().setSize(size);
+    }, path, callback);
+  }
+
+  /**
+   * Static method for encapuslating the the logic of instantiating a page object
+   * and enforcing that the object is cleaned up afterward. This is main piece for
+   * guaranteeing that we don't end up with a bunch of zombie browser windows open
    * after a test fails.
    *
    * @param classImplementation
@@ -82,15 +143,31 @@ public class TestRunner<T extends PageObjectBase> {
   public static <T extends PageObjectBase> void run(Class<T> classImplementation, String path,
       ITestAction<T> callback) {
 
-      runImplementation(classImplementation,
-        (WebDriver browser)->{
-          browser.manage().window().maximize();
-        },
-          path,callback);
+    runImplementation(classImplementation, (WebDriver browser) -> {
+      browser.manage().window().maximize();
+    }, path, callback);
   }
 
-  private static <T extends PageObjectBase> void runImplementation(Class<T> classImplementation, IResize<T> resizer, String path,
-      ITestAction<T> callback) {
+  /**
+   * Static method for encapuslating the the logic of instantiating a page object
+   * and enforcing that the object is cleaned up afterward. This is main piece for
+   * guaranteeing that we don't end up with a bunch of zombie browser windows open
+   * after a test fails.
+   *
+   * @param classImplementation
+   *          A Class object. Typically passed along the lines of
+   *          {@code}MyPageObjectClass.class{@code}
+   * @param resizer
+   *          object of IResize interface
+   *
+   * @param path
+   *          The path of the URL to be tested. (e.g. /types/lung)
+   * @param callback
+   *          Callback method containing the tests to be executed.
+   */
+
+  private static <T extends PageObjectBase> void runImplementation(Class<T> classImplementation, IResize<T> resizer,
+      String path, ITestAction<T> callback) {
 
     try {
       /**
