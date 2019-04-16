@@ -6,12 +6,8 @@
       <class name="gov.cancer.tests.crosscutting.BreadCrumb_Test" />
     </classes>
   </test>
-  <test name="Page Title tests." preserve-order="true">
-    <classes>
-      <class name="gov.cancer.tests.crosscutting.PageTitle_Test" />
-    </classes>
-  </test>
-  <test name="Footer tests." preserve-order="true">
+
+  <test name="Footer tests.">
     <classes>
       <class name="gov.cancer.tests.crosscutting.Footer_Test" />
     </classes>
@@ -32,7 +28,7 @@
       <class name="gov.cancer.tests.crosscutting.LanguageToggle_Test" />
     </classes>
   </test>
-  <test name="Page Options tests." preserve-order="true">
+ß  <test name="Page Options tests." preserve-order="true">
     <classes>
       <class name="gov.cancer.tests.crosscutting.PageOptions_Test" />
     </classes>

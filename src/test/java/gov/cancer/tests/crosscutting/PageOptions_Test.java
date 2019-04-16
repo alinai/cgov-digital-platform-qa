@@ -27,7 +27,7 @@ public class PageOptions_Test extends TestObjectBase {
 
     TestRunner.run(PageOptions.class, path, (PageOptions page) -> {
 
-      Assert.assertTrue(page.IsVisible(), "PageOption is visible.");
+      Assert.assertTrue(page.isPageOptionsVisible(), "PageOption is visible.");
 
     });
 
@@ -42,10 +42,10 @@ public class PageOptions_Test extends TestObjectBase {
 
   @Test(dataProvider = "getPageOptionsPaths")
   public void verifyPrintButtonIsVisible(String path) {
-    String cssSelector = "page-options--print";
+
     TestRunner.run(PageOptions.class, path, (PageOptions page) -> {
 
-      Assert.assertTrue(page.ButtonVisible(cssSelector), "Print Button is visible.");
+      Assert.assertTrue(page.isPrintButtonVisible(), "Print Button is visible.");
 
     });
 
@@ -61,10 +61,10 @@ public class PageOptions_Test extends TestObjectBase {
 
   @Test(dataProvider = "getFontResizerPresentPaths")
   public void verifyFontResizerButtonIsVisibleAtDesktop(String path) {
-    String cssSelector = "page-options--resize";
+
     TestRunner.runDesktop(PageOptions.class, path, (PageOptions page) -> {
 
-      Assert.assertTrue(page.ButtonVisible(cssSelector), "FontResizer Button is visible at Desktop breakpoint.");
+      Assert.assertTrue(page.isFontResizerButtonVisible(), "FontResizer Button is visible at Desktop breakpoint.");
 
     });
 
@@ -80,10 +80,11 @@ public class PageOptions_Test extends TestObjectBase {
 
   @Test(dataProvider = "getFontResizerPresentPaths")
   public void verifyFontResizerButtonIsVisibleAtTablet(String path) {
-    String cssSelector = "page-options--resize";
+
     TestRunner.runTablet(PageOptions.class, path, (PageOptions page) -> {
 
-      Assert.assertFalse(page.ButtonVisible(cssSelector), "Error: Font Resizer Button is visible at Tablet breakpoint");
+      Assert.assertFalse(page.isFontResizerButtonVisible(),
+          "Error: Font Resizer Button is visible at Tablet breakpoint");
 
     });
 
@@ -99,10 +100,11 @@ public class PageOptions_Test extends TestObjectBase {
 
   @Test(dataProvider = "getFontResizerPresentPaths")
   public void verifyFontResizerButtonIsVisibleAtMobile(String path) {
-    String cssSelector = "page-options--resize";
+
     TestRunner.runMobile(PageOptions.class, path, (PageOptions page) -> {
 
-      Assert.assertFalse(page.ButtonVisible(cssSelector), "Error: Font Resizer Button is visible at Mobile breakpoint");
+      Assert.assertFalse(page.isFontResizerButtonVisible(),
+          "Error: Font Resizer Button is visible at Mobile breakpoint");
 
     });
 
@@ -117,10 +119,10 @@ public class PageOptions_Test extends TestObjectBase {
 
   @Test(dataProvider = "getFontResizerAbsentPaths")
   public void verifyFontResizerButtonIsNotVisible(String path) {
-    String cssSelector = "page-options--resize";
+
     TestRunner.run(PageOptions.class, path, (PageOptions page) -> {
 
-      Assert.assertFalse(page.ButtonVisible(cssSelector), "Error: Font Resizer Button is visible.");
+      Assert.assertFalse(page.isFontResizerButtonVisible(), "Error: Font Resizer Button is visible.");
 
     });
 
