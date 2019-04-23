@@ -34,18 +34,57 @@ public class PageOptions_Test extends TestObjectBase {
   }
 
   /**
-   * Are the Print Buttons displayed on pages where they're expected?
+   * At desktop breakpoint, are the Print Buttons displayed on pages where they're
+   * expected?
    *
    * @param path
    *          Path of the page to check.
    */
 
   @Test(dataProvider = "getPageOptionsPaths")
-  public void verifyPrintButtonIsVisible(String path) {
+  public void verifyPrintButtonIsVisibleAtDesktop(String path) {
 
-    TestRunner.run(PageOptions.class, path, (PageOptions page) -> {
+    TestRunner.runDesktop(PageOptions.class, path, (PageOptions page) -> {
 
       Assert.assertTrue(page.isPrintButtonVisible(), "Print Button is visible.");
+
+    });
+
+  }
+
+  /**
+   * At tablet breakpoint, are the Print Buttons displayed on pages where they're
+   * NOT expected?
+   *
+   * @param path
+   *          Path of the page to check.
+   */
+
+  @Test(dataProvider = "getPageOptionsPaths")
+  public void verifyPrintButtonIsVisibleAtTablet(String path) {
+
+    TestRunner.runTablet(PageOptions.class, path, (PageOptions page) -> {
+
+      Assert.assertFalse(page.isPrintButtonVisible(), "Error: Print Button is visible at Tablet breakpoint");
+
+    });
+
+  }
+
+  /**
+   * At mobile breakpoint, are the Print Buttons displayed on pages where they're
+   * NOT expected?
+   *
+   * @param path
+   *          Path of the page to check.
+   */
+
+  @Test(dataProvider = "getPageOptionsPaths")
+  public void verifyPrintButtonIsVisibleAtMobile(String path) {
+
+    TestRunner.runMobile(PageOptions.class, path, (PageOptions page) -> {
+
+      Assert.assertFalse(page.isPrintButtonVisible(), "Error: Print Button is visible at Mobile breakpoint");
 
     });
 
@@ -123,6 +162,78 @@ public class PageOptions_Test extends TestObjectBase {
     TestRunner.run(PageOptions.class, path, (PageOptions page) -> {
 
       Assert.assertFalse(page.isFontResizerButtonVisible(), "Error: Font Resizer Button is visible.");
+
+    });
+
+  }
+
+  /**
+   * Are the Email Buttons displayed on pages where they're expected?
+   *
+   * @param path
+   *          Path of the page to check.
+   */
+
+  @Test(dataProvider = "getPageOptionsPaths")
+  public void verifyEmailButtonIsVisible(String path) {
+
+    TestRunner.run(PageOptions.class, path, (PageOptions page) -> {
+
+      Assert.assertTrue(page.isEmailButtonVisible(), "Email Button is visible.");
+
+    });
+
+  }
+
+  /**
+   * Are the Facebook Buttons displayed on pages where they're expected?
+   *
+   * @param path
+   *          Path of the page to check.
+   */
+
+  @Test(dataProvider = "getPageOptionsPaths")
+  public void verifyFacebookButtonIsVisible(String path) {
+
+    TestRunner.run(PageOptions.class, path, (PageOptions page) -> {
+
+      Assert.assertTrue(page.isFaceBookButtonVisible(), "Facebook Button is visible.");
+
+    });
+
+  }
+
+  /**
+   * Are the Twitter Buttons displayed on pages where they're expected?
+   *
+   * @param path
+   *          Path of the page to check.
+   */
+
+  @Test(dataProvider = "getPageOptionsPaths")
+  public void verifyTwitterButtonIsVisible(String path) {
+
+    TestRunner.run(PageOptions.class, path, (PageOptions page) -> {
+
+      Assert.assertTrue(page.isTwitterButtonVisible(), "Twitter Button is visible.");
+
+    });
+
+  }
+
+  /**
+   * Are the Pinterest Buttons displayed on pages where they're expected?
+   *
+   * @param path
+   *          Path of the page to check.
+   */
+
+  @Test(dataProvider = "getPageOptionsPaths")
+  public void verifyPinterestButtonIsVisible(String path) {
+
+    TestRunner.run(PageOptions.class, path, (PageOptions page) -> {
+
+      Assert.assertTrue(page.isPinterestButtonVisible(), "Pinterest Button is visible.");
 
     });
 

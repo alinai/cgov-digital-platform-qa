@@ -12,11 +12,13 @@
       <class name="gov.cancer.tests.crosscutting.Footer_Test" />
     </classes>
   </test>
+
   <test name="Related Resources tests." preserve-order="true">
     <classes>
       <class name="gov.cancer.tests.crosscutting.RelatedResources_Test" />
     </classes>
   </test>
+
   <test name="Page Options tests">
     <classes>
       <class name="gov.cancer.tests.crosscutting.PageOptions_Test" />
@@ -26,11 +28,6 @@
   <test name="Language Toggle tests." preserve-order="true">
     <classes>
       <class name="gov.cancer.tests.crosscutting.LanguageToggle_Test" />
-    </classes>
-  </test>
-ß  <test name="Page Options tests." preserve-order="true">
-    <classes>
-      <class name="gov.cancer.tests.crosscutting.PageOptions_Test" />
     </classes>
   </test>
 

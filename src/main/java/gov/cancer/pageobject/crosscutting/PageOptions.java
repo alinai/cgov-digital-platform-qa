@@ -14,6 +14,10 @@ public class PageOptions extends PageObjectBase {
 
   String printcss = ".page-options--print";
   String fontresizercss = ".page-options--resize";
+  String emailcss = ".page-options--email";
+  String facebookcss = ".social-share--facebook";
+  String twittercss = ".social-share--twitter";
+  String pinterestcss = ".social-share--pinterest";
 
   @FindBy(how = How.CSS, using = "#PageOptionsControl1")
   WebElement pageOptioncontrol;
@@ -49,8 +53,39 @@ public class PageOptions extends PageObjectBase {
     return ElementHelper.isVisible(pageOptioncontrol, printcss);
   }
 
+  /*
+   * Testing if the FontResizer Buttons exists on page and is visible
+   */
   public boolean isFontResizerButtonVisible() {
     return ElementHelper.isVisible(pageOptioncontrol, fontresizercss);
+  }
+
+  /*
+   * Testing if the Email Button exists on page and is visible
+   */
+  public boolean isEmailButtonVisible() {
+    return ElementHelper.isVisible(pageOptioncontrol, emailcss);
+  }
+
+  /*
+   * Testing if the Facebook Button exists on page and is visible
+   */
+  public boolean isFaceBookButtonVisible() {
+    return ElementHelper.isVisible(pageOptioncontrol, facebookcss);
+  }
+
+  /*
+   * Testing if the Twitter Button exists on page and is visible
+   */
+  public boolean isTwitterButtonVisible() {
+    return ElementHelper.isVisible(pageOptioncontrol, twittercss);
+  }
+
+  /*
+   * Testing if the Pinterest Button exists on page and is visible
+   */
+  public boolean isPinterestButtonVisible() {
+    return ElementHelper.isVisible(pageOptioncontrol, pinterestcss);
   }
 
   /*
