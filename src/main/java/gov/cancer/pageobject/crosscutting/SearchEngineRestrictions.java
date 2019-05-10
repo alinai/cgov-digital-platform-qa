@@ -7,6 +7,11 @@ import org.openqa.selenium.support.How;
 
 import gov.cancer.pageobject.PageObjectBase;
 
+/**
+ * Pseudo page object representing any page in the system. The class is used
+ * solely for verifying the attributes of meta name =robots
+ */
+
 public class SearchEngineRestrictions extends PageObjectBase {
 
   @FindBy(how = How.CSS, using = "head")
@@ -24,7 +29,7 @@ public class SearchEngineRestrictions extends PageObjectBase {
 
   /* Returns the meta tag content property of the page */
   public String getIncludeInSearchMetaTagProperty() {
-    String tag = pageHeader.findElement(By.cssSelector("meta:nth-child(3)")).getAttribute("content");
+    String tag = pageHeader.findElement(By.cssSelector("meta[name='robots']")).getAttribute("content");
     return tag;
   }
 

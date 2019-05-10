@@ -15,7 +15,7 @@ public class SearchEngineRestrictions_Test extends TestObjectBase {
 
   /**
    * Verify that for meta property = robot the attribute "index" is rendered on
-   * pages where the "Include in Search" was set.
+   * pages when "Include in Search" is set.
    *
    * @param path
    *          Path of the page to check.
@@ -31,7 +31,7 @@ public class SearchEngineRestrictions_Test extends TestObjectBase {
 
   /**
    * Verify that for meta property = robot the attribute "noindex" is rendered on
-   * pages where the "Exclude From Search" was set.
+   * pages when "Exclude From Search" is set.
    *
    * @param path
    *          Path of the page to check.
@@ -48,8 +48,8 @@ public class SearchEngineRestrictions_Test extends TestObjectBase {
 
   /************** Data Providers *************/
   /**
-   * Retrieves a list of paths to pages which are expected to have pageoptions
-   * container.
+   * Retrieves a list of paths to pages which are expected to have Include in
+   * Search Selected
    *
    * @return An iterable list of single element arrays, each containing a single
    *         path.
@@ -61,8 +61,8 @@ public class SearchEngineRestrictions_Test extends TestObjectBase {
   }
 
   /**
-   * Retrieves a list of paths to pages which are expected to have pageoptions
-   * container.
+   * Retrieves a list of paths to pages which are expected to have Exclude from
+   * Search Selected
    *
    * @return An iterable list of single element arrays, each containing a single
    *         path.
