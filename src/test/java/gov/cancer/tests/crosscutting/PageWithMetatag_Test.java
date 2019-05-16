@@ -7,15 +7,15 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import gov.cancer.framework.ExcelDataReader;
-import gov.cancer.pageobject.crosscutting.SearchEngineRestrictions;
+import gov.cancer.pageobject.crosscutting.PageWithMetatag;
+import gov.cancer.pageobject.helper.RobotMetaTag;
 import gov.cancer.tests.TestObjectBase;
 import gov.cancer.tests.TestRunner;
 
-public class SearchEngineRestrictions_Test extends TestObjectBase {
+public class PageWithMetatag_Test extends TestObjectBase {
 
   /**
-   * Verify that for meta property = robot the attribute "index" is rendered on
-   * pages when "Include in Search" is set.
+   * Verify that the "robot" tag is present
    *
    * @param path
    *          Path of the page to check.
@@ -23,8 +23,9 @@ public class SearchEngineRestrictions_Test extends TestObjectBase {
   @Test(dataProvider = "getPagesWithIndex")
   public void verifyIncludeSearchIsSelected(String path) {
 
-    TestRunner.run(SearchEngineRestrictions.class, path, (SearchEngineRestrictions page) -> {
-      Assert.assertEquals("index", page.getIncludeInSearchMetaTagProperty());
+    TestRunner.run(PageWithMetatag.class, path, (PageWithMetatag page) -> {
+      RobotMetaTag rmt = page.getRobotMetaTag();
+      Assert.assertTrue(rmt.getAllowSearch(), "Found index as Robot Metatag content");
 
     });
   }
@@ -36,11 +37,13 @@ public class SearchEngineRestrictions_Test extends TestObjectBase {
    * @param path
    *          Path of the page to check.
    */
+
   @Test(dataProvider = "getPagesWithNoIndex")
   public void verifyExcludeFromSearchIsSelected(String path) {
 
-    TestRunner.run(SearchEngineRestrictions.class, path, (SearchEngineRestrictions page) -> {
-      Assert.assertEquals("noindex", page.getIncludeInSearchMetaTagProperty());
+    TestRunner.run(PageWithMetatag.class, path, (PageWithMetatag page) -> {
+      RobotMetaTag rmt = page.getRobotMetaTag();
+      Assert.assertTrue(rmt.getAllowSearch(), "Found noindex as Robot Metatag content");
 
     });
 
@@ -57,7 +60,7 @@ public class SearchEngineRestrictions_Test extends TestObjectBase {
   @DataProvider(name = "getPagesWithIndex")
   public Iterator<Object[]> getPagesWithIndex() {
     String[] columns = { "path" };
-    return new ExcelDataReader(getDataFilePath("searchenginerestriction-data.xlsx"), "getpages_with_index", columns);
+    return new ExcelDataReader(getDataFilePath("page-with-metatag-data.xlsx"), "getpages_with_index", columns);
   }
 
   /**
@@ -70,6 +73,6 @@ public class SearchEngineRestrictions_Test extends TestObjectBase {
   @DataProvider(name = "getPagesWithNoIndex")
   public Iterator<Object[]> getPagesWithNoIndex() {
     String[] columns = { "path" };
-    return new ExcelDataReader(getDataFilePath("searchenginerestriction-data.xlsx"), "getpages_with_noindex", columns);
+    return new ExcelDataReader(getDataFilePath("page-with-metatag-data.xlsx"), "getpages_with_noindex", columns);
   }
 }
