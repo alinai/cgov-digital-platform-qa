@@ -43,7 +43,7 @@ public class PageWithMetatag_Test extends TestObjectBase {
 
     TestRunner.run(PageWithMetatag.class, path, (PageWithMetatag page) -> {
       RobotMetaTag rmt = page.getRobotMetaTag();
-      Assert.assertTrue(rmt.getAllowSearch(), "Found noindex as Robot Metatag content");
+      Assert.assertFalse(rmt.getAllowSearch(), "Error: Found index as Robot Metatag content");
 
     });
 

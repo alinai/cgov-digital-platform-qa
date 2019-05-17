@@ -17,8 +17,8 @@ public class RobotMetaTag extends MetaTag {
    */
   public boolean getAllowSearch() {
     String str = getContent().toLowerCase();
-    if (str != null)
-      return str.contains("index");
+    if (str != null && (str.equals("index")))
+      return true;
     else
       return false;
   }
