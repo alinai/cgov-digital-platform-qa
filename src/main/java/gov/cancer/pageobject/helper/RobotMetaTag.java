@@ -16,8 +16,8 @@ public class RobotMetaTag extends MetaTag {
    * Reports whether the content is index or noindex.
    */
   public boolean getAllowSearch() {
-    String str = getContent().toLowerCase();
-    if (str != null && (str.equals("index")))
+    String str = getContent();
+    if (str != null && (str.trim().toLowerCase().equals("index")))
       return true;
     else
       return false;

@@ -1,5 +1,7 @@
 package gov.cancer.pageobject.crosscutting;
 
+
+
 import org.openqa.selenium.WebElement;
 
 import gov.cancer.framework.ElementHelper;
@@ -11,7 +13,7 @@ import gov.cancer.pageobject.helper.RobotMetaTag;
  * solely for verifying the attributes of meta name =robots
  */
 
-public class PageWithMetatag extends PageObjectBase {
+public class PageWithMetaTag extends PageObjectBase {
   String cssRobotTag = "meta[name='robots']";
 
   /**
@@ -20,7 +22,7 @@ public class PageWithMetatag extends PageObjectBase {
    * @param path
    *          server-relative path of the page to load.
    */
-  public PageWithMetatag(String path) {
+  public PageWithMetaTag(String path) {
     super(path);
   }
 
