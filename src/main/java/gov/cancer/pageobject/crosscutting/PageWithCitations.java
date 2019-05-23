@@ -1,11 +1,15 @@
 package gov.cancer.pageobject.crosscutting;
 
+import java.util.List;
+
+import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 import gov.cancer.framework.ElementHelper;
 import gov.cancer.pageobject.PageObjectBase;
+import gov.cancer.pageobject.helper.Citation;
 
 /**
  * Pseudo page object representing any page in the system. The Citation class is
@@ -39,7 +43,7 @@ public class PageWithCitations extends PageObjectBase {
   }
 
   /* Returns true if header of Citation is displayed */
-  public boolean isCitationHeaderVisible() {
+  public boolean isCitationHeaderPresent() {
     if (ElementHelper.findElement(citationsSection, citationheader) != null)
       return ElementHelper.findElement(citationsSection, citationheader).isDisplayed();
     else
@@ -54,10 +58,12 @@ public class PageWithCitations extends PageObjectBase {
       return null;
   }
 
+  /**
+   * Find all of the citation objects on the page.
+   */
+  public List<Citation> getCitationList() {
+
+    throw new NotImplementedException("TODO:implement getCitationList method");
+  }
+
 }
-// /* Returns text of Citations */
-// public String citationText() {
-//
-// return citationsSection.getText().trim();
-// }
-//

@@ -1,4 +1,4 @@
-package gov.cancer.tests.crosscutting;
+package gov.cancer.tests.fields;
 
 import java.util.Iterator;
 
@@ -46,7 +46,7 @@ public class Citations_Test extends TestObjectBase {
 
     TestRunner.run(PageWithCitations.class, path, (PageWithCitations page) -> {
 
-      Assert.assertTrue(page.isCitationHeaderVisible(), "Citation Header is visible.");
+      Assert.assertTrue(page.isCitationHeaderPresent(), "Citation Header is visible.");
     });
   }
 
@@ -58,7 +58,7 @@ public class Citations_Test extends TestObjectBase {
    * @param Expectedlanguage
    *          Language of the page to check.
    */
-  @Test(dataProvider = "getCitationHeadetTextPaths")
+  @Test(dataProvider = "getCitationHeaderTextPaths")
   public void isHeaderTextCorrect(String path, String expectedHeaderText) {
 
     TestRunner.run(PageWithCitations.class, path, (PageWithCitations page) -> {
@@ -75,17 +75,12 @@ public class Citations_Test extends TestObjectBase {
    * @param path
    *          Path of the page to check.
    */
-  // @Test(dataProvider = "getPageCitationsPaths")
-  // public void verifyCitationTextlengthIsCorrect(String path, String language) {
-  //
-  // TestRunner.run(PageWithCitations.class, path, (PageWithCitations page) -> {
-  //
-  // Assert.assertTrue(page.citationText().length() > 20 &&
-  // page.citationText().length() < 300,
-  // "header text is in range of 20 to300 chars");
-  // });
-  //
-  // }
+  @Test(dataProvider = "getPageCitationsPaths")
+  public void verifyCitationTextlengthIsCorrect(String path) {
+    // TestRunner.run(PageWithCitations.class, path, (PageWithCitations page) -> {
+    // List<Citation> list = page.getCitationList();
+
+  }
 
   /*******************************************
    * DATA PROVIDER
@@ -110,7 +105,7 @@ public class Citations_Test extends TestObjectBase {
    * @return An iterable list of two element arrays, each containing a path and
    *         language.
    */
-  @DataProvider(name = "getCitationHeadetTextPaths")
+  @DataProvider(name = "getCitationHeaderTextPaths")
   public Iterator<Object[]> getCitationHeadetTextPaths() {
     String[] columns = { "path", "expectedHeaderText" };
     return new ExcelDataReader(getDataFilePath("citations-data.xlsx"), "pages_with_citations", columns);
