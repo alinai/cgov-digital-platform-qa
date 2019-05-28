@@ -26,7 +26,7 @@ public class Citations_Test extends TestObjectBase {
 
     TestRunner.run(PageWithCitations.class, path, (PageWithCitations page) -> {
 
-      Assert.assertTrue(page.isCitationSectionPresent(), "Citation Section is present.");
+      Assert.assertTrue(page.isSectionPresent(), "Citation Section is present.");
 
     });
 
@@ -46,7 +46,7 @@ public class Citations_Test extends TestObjectBase {
 
     TestRunner.run(PageWithCitations.class, path, (PageWithCitations page) -> {
 
-      Assert.assertTrue(page.isCitationHeaderPresent(), "Citation Header is visible.");
+      Assert.assertTrue(page.isHeaderPresent(), "Citation Header is visible.");
     });
   }
 
@@ -63,7 +63,7 @@ public class Citations_Test extends TestObjectBase {
 
     TestRunner.run(PageWithCitations.class, path, (PageWithCitations page) -> {
 
-      Assert.assertEquals(page.getCitationHeaderText(), expectedHeaderText, "Citation header text is correct.");
+      Assert.assertEquals(page.getHeaderText(), expectedHeaderText, "Citation header text is correct.");
 
     });
   }
@@ -76,10 +76,9 @@ public class Citations_Test extends TestObjectBase {
    *          Path of the page to check.
    */
   @Test(dataProvider = "getPageCitationsPaths")
-  public void verifyCitationTextlengthIsCorrect(String path) {
-    // TestRunner.run(PageWithCitations.class, path, (PageWithCitations page) -> {
-    // List<Citation> list = page.getCitationList();
-
+  public void verifyTextlengthIsCorrect(String path) {
+    // throw new NotImplementedException("TODO:implement verifyTextlengthIsCorrect
+    // method");
   }
 
   /*******************************************
