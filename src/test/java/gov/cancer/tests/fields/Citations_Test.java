@@ -1,6 +1,7 @@
 package gov.cancer.tests.fields;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -8,10 +9,39 @@ import org.testng.annotations.Test;
 
 import gov.cancer.framework.ExcelDataReader;
 import gov.cancer.pageobject.crosscutting.PageWithCitations;
+import gov.cancer.pageobject.helper.Citation;
+import gov.cancer.pageobject.helper.Link;
 import gov.cancer.tests.TestObjectBase;
 import gov.cancer.tests.TestRunner;
 
 public class Citations_Test extends TestObjectBase {
+
+  public static void main(String[] args) {
+
+    String path = "/about-cancer/treatment/side-effects";
+    TestRunner.run(PageWithCitations.class, path, (PageWithCitations page) -> {
+
+      boolean sectionIsPresent = page.isCitationSectionPresent();
+      boolean headerIsPresent = page.isCitationHeaderPresent();
+
+      String headerText = page.getCitationHeaderText();
+
+      // Gets a list of three citations.
+      List<Citation> citationList = page.getCitationList();
+
+      // The first citation has no PUBMED link.
+      Citation plainCitation = citationList.get(0);
+      String text1 = plainCitation.getText();
+      boolean hasPubMedLink = plainCitation.hasPubMedLink();
+
+      // The third citation does have a PUBMED link.
+      Citation pubmedCitation = citationList.get(2);
+      String text2 = pubmedCitation.getText();
+      Link pubmedLink = pubmedCitation.getPubMedLink();
+
+    });
+
+  }
 
   /**
    * This method is checking if the Citation section exists on the pages
@@ -26,7 +56,7 @@ public class Citations_Test extends TestObjectBase {
 
     TestRunner.run(PageWithCitations.class, path, (PageWithCitations page) -> {
 
-      Assert.assertTrue(page.isSectionPresent(), "Citation Section is present.");
+      Assert.assertTrue(page.isCitationSectionPresent(), "Citation Section is present.");
 
     });
 
@@ -46,7 +76,7 @@ public class Citations_Test extends TestObjectBase {
 
     TestRunner.run(PageWithCitations.class, path, (PageWithCitations page) -> {
 
-      Assert.assertTrue(page.isHeaderPresent(), "Citation Header is visible.");
+      Assert.assertTrue(page.isCitationHeaderPresent(), "Citation Header is visible.");
     });
   }
 
@@ -63,7 +93,7 @@ public class Citations_Test extends TestObjectBase {
 
     TestRunner.run(PageWithCitations.class, path, (PageWithCitations page) -> {
 
-      Assert.assertEquals(page.getHeaderText(), expectedHeaderText, "Citation header text is correct.");
+      Assert.assertEquals(page.getCitationHeaderText(), expectedHeaderText, "Citation header text is correct.");
 
     });
   }
@@ -77,8 +107,8 @@ public class Citations_Test extends TestObjectBase {
    */
   @Test(dataProvider = "getPageCitationsPaths")
   public void verifyTextlengthIsCorrect(String path) {
-    // throw new NotImplementedException("TODO:implement verifyTextlengthIsCorrect
-    // method");
+    // TestRunner.run(PageWithCitations.class, path, (PageWithCitations page) -> {
+    // List<Citation> list = page.getCitationList();
   }
 
   /*******************************************
@@ -105,7 +135,7 @@ public class Citations_Test extends TestObjectBase {
    *         language.
    */
   @DataProvider(name = "getCitationHeaderTextPaths")
-  public Iterator<Object[]> getCitationHeadetTextPaths() {
+  public Iterator<Object[]> getCitationHeaderTextPaths() {
     String[] columns = { "path", "expectedHeaderText" };
     return new ExcelDataReader(getDataFilePath("citations-data.xlsx"), "pages_with_citations", columns);
 
