@@ -1,11 +1,9 @@
 package gov.cancer.pageobject.crosscutting;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 
 import gov.cancer.framework.ElementHelper;
 import gov.cancer.pageobject.PageObjectBase;
@@ -17,14 +15,18 @@ import gov.cancer.pageobject.helper.Citation;
  */
 public class PageWithCitations extends PageObjectBase {
 
-  @FindBy(how = How.CSS, using = "#cgvCitationSl")
+  // The overall section.
   WebElement citationsSection;
+
+  // Citation header
+  WebElement citationHeader;
 
   /********* CITATION SELECTORS ***********************/
 
-  final public String citationheader = "#cgvCitationSl > div > h6";
+  final static String SECTION_SELECTOR = "#cgvCitationSl";
+  final static String HEADER_SELECTOR = ":scope h6";
+  final static String CITATION_SELECTOR = ":scope ol > li";
 
-  /********* CITATION Methods ***********************/
 
   /**
    * Constructor
@@ -32,38 +34,63 @@ public class PageWithCitations extends PageObjectBase {
    * @param path
    *          server-relative path of the page to load.
    */
-
   public PageWithCitations(String path) {
     super(path);
+
+    this.citationsSection = ElementHelper.findElement(getBrowser(), SECTION_SELECTOR);
+    this.citationHeader = ElementHelper.findElement(this.citationsSection, HEADER_SELECTOR);
   }
 
-  /* Returns true if Citation Section is displayed on the page */
+  /**
+   * Reports whether the citation section was found.
+   *
+   * @return True if it was, false otherwise.
+   */
   public boolean isCitationSectionPresent() {
     return citationsSection.isDisplayed();
   }
 
   /* Returns true if header of Citation is displayed */
+  /**
+   * Is the Citation header present?
+   *
+   * @return True if present, false otherwise.
+   */
   public boolean isCitationHeaderPresent() {
-    if (ElementHelper.findElement(citationsSection, citationheader) != null)
-      return ElementHelper.findElement(citationsSection, citationheader).isDisplayed();
+    if (citationHeader != null)
+      return citationHeader.isDisplayed();
     else
       return false;
   }
 
-  /* Returns the header of the Citation */
+  /**
+   * Returns the citation section's header.
+   *
+   * @return A String containing the header if present.
+   */
   public String getCitationHeaderText() {
-    if (ElementHelper.findElement(citationsSection, citationheader) != null)
-      return ElementHelper.findElement(citationsSection, citationheader).getText();
+    if (citationHeader != null)
+      return citationHeader.getText();
     else
       return null;
   }
 
   /**
    * Find all of the citation objects on the page.
+   *
+   * @return A List of zero or more Citation objects.
    */
   public List<Citation> getCitationList() {
 
-    throw new NotImplementedException("TODO:implement getCitationList method");
+    List<Citation> citationList = new ArrayList<Citation>();
+
+    List<WebElement> elements = ElementHelper.findElements(this.citationsSection, CITATION_SELECTOR);
+    for (WebElement el : elements) {
+      Citation citation = new Citation(el);
+      citationList.add(citation);
+    }
+
+    return citationList;
   }
 
 }
