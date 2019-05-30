@@ -1,8 +1,5 @@
 package gov.cancer.pageobject.helper;
 
-import java.net.URL;
-
-import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.WebElement;
 
 import gov.cancer.framework.ElementHelper;
@@ -18,7 +15,6 @@ public class Citation {
   // scope in order to avoid catching links embedded in the citation text.
   static final String PUBMED_SELECTOR = ":scope > a";
 
-
   // The element representing the entire citation.
   private WebElement theCitation;
 
@@ -31,7 +27,8 @@ public class Citation {
   /**
    * Constructor
    *
-   * @param element WebElement containing the markup for the entire citation.
+   * @param element
+   *          WebElement containing the markup for the entire citation.
    */
   public Citation(WebElement element) {
     this.theCitation = element;
@@ -50,10 +47,11 @@ public class Citation {
 
   /**
    * Reports whether the citaiton has a PUBMED link
+   *
    * @return
    */
   public boolean hasPubMedLink() {
-    return (pubmedLink != null);
+    return (pubmedLink != null && pubmedLink.getText().contains("[PubMed Abstract]"));
   }
 
   /**
@@ -63,9 +61,11 @@ public class Citation {
    *         Returns null otherwise.
    */
   public Link getPubMedLink() {
-    if (pubmedLink != null)
+
+    if (pubmedLink != null && pubmedLink.getText().contains("[PubMed Abstract]")) {
       return new Link(pubmedLink);
-    else
+
+    } else
       return null;
   }
 }

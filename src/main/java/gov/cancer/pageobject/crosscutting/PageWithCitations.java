@@ -16,7 +16,7 @@ import gov.cancer.pageobject.helper.Citation;
 public class PageWithCitations extends PageObjectBase {
 
   // The overall section.
-  WebElement citationsSection;
+  WebElement citationsSection = null;
 
   // Citation header
   WebElement citationHeader;
@@ -37,7 +37,6 @@ public class PageWithCitations extends PageObjectBase {
     super(path);
 
     this.citationsSection = ElementHelper.findElement(getBrowser(), SECTION_SELECTOR);
-    this.citationHeader = ElementHelper.findElement(this.citationsSection, HEADER_SELECTOR);
   }
 
   /**
@@ -45,8 +44,11 @@ public class PageWithCitations extends PageObjectBase {
    *
    * @return True if it was, false otherwise.
    */
-  public boolean isCitationSectionPresent() {
-    return citationsSection.isDisplayed();
+  public boolean isSectionPresent() {
+    if (citationsSection != null)
+      return citationsSection.isDisplayed();
+    else
+      return false;
   }
 
   /* Returns true if header of Citation is displayed */
@@ -55,10 +57,10 @@ public class PageWithCitations extends PageObjectBase {
    *
    * @return True if present, false otherwise.
    */
-  public boolean isCitationHeaderPresent() {
+  public boolean isHeaderPresent() {
+    citationHeader = ElementHelper.findElement(citationsSection, HEADER_SELECTOR);
     if (citationHeader != null)
       return citationHeader.isDisplayed();
-
     else
       return false;
   }
@@ -68,10 +70,10 @@ public class PageWithCitations extends PageObjectBase {
    *
    * @return A String containing the header if present.
    */
-  public String getCitationHeaderText() {
+  public String getHeaderText() {
+    this.citationHeader = ElementHelper.findElement(citationsSection, HEADER_SELECTOR);
     if (citationHeader != null)
       return citationHeader.getText();
-
     else
       return null;
   }
